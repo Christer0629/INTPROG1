@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 5 AJAX</title>
+</head>
+<body>
+
+    <h1>Lab 5: PHP + JSON + JavaScript</h1>
+
+    <input type="text" id="name" placeholder="Enter your name">
+    <button onclick="sendData()">Send</button>
+
+    <p id="result"></p>
+
+    <script>
+        function sendData() {
+
+            const name = document.getElementById("name").value;
+
+            fetch("lab5_process.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerHTML =
+                    data.status + ": " + data.message;
+            })
+            .catch(error => {
+                document.getElementById("result").innerHTML =
+                    "Error: " + error;
+            });
+        }
+    </script>
+
+</body>
+</html>

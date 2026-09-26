@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 4 Test</title>
+</head>
+
+<body>
+
+<h2>Lab 4 JSON Input</h2>
+
+<button id="sendButton">Send JSON Data</button>
+
+<p id="result"></p>
+
+<script>
+
+document.getElementById("sendButton").addEventListener("click", function() {
+
+    fetch("lab4_input.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username: "admin",
+            password: "1234"
+        })
+    })
+
+    .then(response => response.text())
+
+    .then(data => {
+        document.getElementById("result").innerText = data;
+    })
+
+    .catch(error => {
+        document.getElementById("result").innerText =
+            "Error: " + error;
+    });
+
+});
+
+</script>
+
+</body>
+</html>
